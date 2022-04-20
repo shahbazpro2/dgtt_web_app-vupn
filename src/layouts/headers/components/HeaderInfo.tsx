@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/Hooks";
 import { toggleLoginModal } from "../../../modules/login/redux/LoginSlice";
 import { toggleRegisterModal } from "../../../modules/register/redux/RegisterSlice";
 import ForgotPassword from "../../../modules/forgot-password/Index";
+import { useNavigate } from "react-router-dom";
 
 const HeaderInfo = () => {
     const [currentTime, setCurrentTime] = useState(format(new Date(), "HH:mm:ss dd/MM/yyyy", { locale: vi }));
@@ -15,6 +16,7 @@ const HeaderInfo = () => {
     const registerState = useAppSelector(state => state.register);
     const forgotPasswordState = useAppSelector(state => state.forgotPassword);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate()
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -34,6 +36,7 @@ const HeaderInfo = () => {
             <Space size={25}>
                 <span className="font-size-12 font-bold letter-spacing-big cursor-pointer" onClick={() => dispatch(toggleRegisterModal())}>THÔNG TIN TÀI KHOẢN</span>
                 <span className="font-size-12 font-bold letter-spacing-big cursor-pointer" onClick={() => dispatch(toggleRegisterModal())}>ĐĂNG KÝ</span>
+                <span className="font-size-12 font-bold letter-spacing-big cursor-pointer" onClick={() => navigate('/profile')}>HỒ SƠ</span>
                 <span className="font-size-12 font-bold letter-spacing-big cursor-pointer" onClick={() => dispatch(toggleLoginModal())}>ĐĂNG NHẬP</span>
             </Space>
             {registerState.modalVisible &&

@@ -8,7 +8,7 @@ const Profile = () => {
     return (
         <div style={{ padding: '20px' }}>
             <h3 style={{ textAlign: 'center' }}>Loại hình đăng ký</h3>
-            <Row style={{ marginTop: 5 }} align="middle" justify="center">
+            <Row style={{ margin: '5px 0px' }} align="middle" justify="center">
                 <Col span={24}>
                     <Tabs type="card" className="custom-tab">
                         <TabPane tab="CÁ NHÂN" key="1">

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import FloatDatePicker from "../common/components/FloatDatePicker";
 import { PlusCircleOutlined } from '@ant-design/icons';
 
+const { Option } = Select;
+
 const OrganizationForm = () => {
     const [form] = Form.useForm();
     const [count, setCount] = useState<any>([]);
@@ -44,16 +46,16 @@ const OrganizationForm = () => {
                                     rules={[{ required: true, message: "Vui lòng nhập tên tổ chức" }]}>
                                     <FloatInput label="Tên tổ chức" placeholder="Tên tổ chức" />
                                 </Form.Item>
-                                <label className="input-show-count">{count.organizationName || 0}/20</label>
+                                <label className="input-show-count">{count.organizationName || 0}/100</label>
                             </Col>
                             <Col span={12}>
                                 <Form.Item
                                     name="businessRegNumber"
-                                >
-                                    <Select placeholder="Số ĐKKD" className="custom-select"></Select>
+                                    rules={[{ required: true, message: "Vui lòng nhập số ĐKKD" }]}>
+                                    <FloatInput label="Số ĐKKD" placeholder="Số ĐKKD" />
                                 </Form.Item>
+                                <label className="input-show-count">{count.organizationName || 0}/20</label>
                             </Col>
-
                         </Row>
                         <Row gutter={30}>
                             <Col span={24}>
@@ -116,7 +118,10 @@ const OrganizationForm = () => {
                             <Form.Item
                                 name="sex"
                             >
-                                <Select placeholder="Giới tính" className="custom-select"></Select>
+                                <Select placeholder="Giới tính" className="custom-select">
+                                    <Option value="male">Male</Option>
+                                    <Option value="female">Female</Option>
+                                </Select>
                             </Form.Item>
                         </Col>
                     </Row>
