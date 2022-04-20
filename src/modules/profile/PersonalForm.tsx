@@ -1,8 +1,9 @@
-import { Button, Col, Form, Row, Select } from "antd";
+import { Button, Col, Form, Row, Select, Upload } from "antd";
 import Box from '../common/components/Box'
 import { FloatInput, FloatTextArea } from '../common/components/Index'
 import { useState } from 'react';
 import FloatDatePicker from "../common/components/FloatDatePicker";
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const PersonalForm = () => {
     const [form] = Form.useForm();
@@ -18,18 +19,24 @@ const PersonalForm = () => {
             });
         }
     }
+    const uploadButton = (
+        <div>
+            <PlusCircleOutlined style={{ fontSize: 40, color: '#c9c9c9' }} />
+        </div>
+    );
     return (
         <div>
-            <Box>
-                <h3 style={{ fontWeight: 'bold' }}>Thông tin chung</h3>
-                <Form
-                    className="custom-form"
-                    style={{ marginTop: 25, marginBottom: 45 }}
-                    name="register"
-                    form={form}
-                    colon={false}
-                    onValuesChange={onValuesChange}
-                >
+            <Form
+                className="custom-form"
+                style={{ marginTop: 25, marginBottom: 45 }}
+                name="personalRegister"
+                form={form}
+                colon={false}
+                onValuesChange={onValuesChange}
+            >
+                <Box>
+                    <h3 style={{ fontWeight: 'bold' }}>Thông tin chung</h3>
+
                     <Row gutter={30}>
                         <Col span={12}>
                             <Form.Item
@@ -41,7 +48,7 @@ const PersonalForm = () => {
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="district"
+                                name="sex"
                             >
                                 <Select placeholder="Giới tính" className="custom-select"></Select>
                             </Form.Item>
@@ -50,87 +57,164 @@ const PersonalForm = () => {
                     <Row gutter={30}>
                         <Col span={12}>
                             <Form.Item
-                                name="fromDate"
+                                name="dateOfBirth"
                                 style={{ marginBottom: 0 }}>
                                 <FloatDatePicker label="" placeholder="Ngày sinh" className="filter-picker bg-white" />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="district"
-                            >
-                                <Select placeholder="Quận/huyện" className="custom-select"></Select>
+                                name="identityCard"
+                                rules={[{ required: true, message: "Vui lòng nhập CCCD/ CMND/ Hộ chiếu." }]}>
+                                <FloatInput label="CCCD/ CMND/ Hộ chiếu" placeholder="CCCD/ CMND/ Hộ chiếu" maxLength={20} />
+                            </Form.Item>
+                            <label className="input-show-count">{count.identityCard || 0}/20</label>
+                        </Col>
+                    </Row>
+                    <Row gutter={30}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="number"
+                                rules={[{ required: true, message: "Vui lòng nhập Số điện thoại." }]}>
+                                <FloatInput label="Số điện thoại" placeholder="Số điện thoại" maxLength={20} />
+                            </Form.Item>
+                            <label className="input-show-count">{count.number || 0}/20</label>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="Date"
+                                style={{ marginBottom: 0 }}>
+                                <FloatDatePicker label="" placeholder="Ngày cấp" className="filter-picker bg-white" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={30}>
                         <Col span={12}>
                             <Form.Item
-                                name="password"
-                                rules={[{ required: true, message: "Vui lòng nhập mật khẩu." }]}>
-                                <FloatInput label="Mật khẩu" placeholder="Mật khẩu" maxLength={20} isPassword={true} />
+                                name="email"
+                                rules={[{ required: true, message: "Vui lòng nhập email." }]}>
+                                <FloatInput type="email" label="Email" placeholder="Email" maxLength={20} />
                             </Form.Item>
-                            <label className="input-show-count">{count.password || 0}/20</label>
+                            <label className="input-show-count">{count.email || 0}/20</label>
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="ward"
+                                name="issued_by"
                             >
-                                <Select placeholder="Phường/xã" className="custom-select"></Select>
+                                <Select placeholder="Nơi cấp" className="custom-select"></Select>
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={30}>
-                        <Col span={12}>
-                            <div style={{ position: 'relative' }}>
-                                <Form.Item
-                                    name="confirmPassword"
-                                    dependencies={["password"]}
-                                    rules={[
-                                        { required: true, message: "Vui lòng nhập lại mật khẩu." },
-                                        ({ getFieldValue }) => ({
-                                            validator(_, value) {
-                                                if (!value || getFieldValue('password') === value) {
-                                                    return Promise.resolve();
-                                                }
-                                                return Promise.reject(new Error('Mật khẩu nhập lại không khớp!'));
-                                            },
-                                        }),
-                                    ]}>
-                                    <FloatInput label="Nhập lại mật khẩu" placeholder="Nhập lại mật khẩu" maxLength={20} isPassword={true} />
-                                </Form.Item>
-                                <label className="input-show-count" style={{ bottom: -4, right: 10 }}>{count.confirmPassword || 0}/20</label>
-                            </div>
 
-                            <div style={{ position: 'relative' }}>
-                                <Form.Item
-                                    name="phone"
-                                    rules={[
-                                        { required: true, message: "Vui lòng nhập số điện thoại." },
-                                    ]}>
-                                    <FloatInput label="Số điện thoại" placeholder="Số điện thoại" maxLength={20} />
-                                </Form.Item>
-                                <label className="input-show-count" style={{ bottom: -4, right: 10 }}>{count.phone || 0}/20</label>
-                            </div>
+                    <h3 style={{ marginTop: '30px' }}>Ảnh CCCD/ CMND/ Hộ chiếu:</h3>
+                    <Row gutter={30}>
+                        <Col span={12}>
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            >
+                                {uploadButton}
+                            </Upload>
+                        </Col>
+                        <Col span={12}>
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            >
+                                {uploadButton}
+                            </Upload>
+                        </Col>
+                    </Row>
+
+                    <h3 style={{ marginTop: '30px' }}>Địa chỉ:</h3>
+                    <Row gutter={30}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="city"
+                                rules={[{ required: true, message: "Vui lòng nhập tình/ Thành phố." }]}>
+                                <FloatInput label="Tình/ Thành phố" placeholder="Tình/ Thành phố" />
+                            </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="address">
-                                <FloatTextArea label="Địa chỉ" placeholder="Nhập địa chỉ số nhà,..." maxLength={200} style={{ height: 125 }} />
+                                name="district"
+                                rules={[{ required: true, message: "Vui lòng nhập quận/ Huyện." }]}>
+                                <FloatInput label="Quận/ Huyện" placeholder="Quận/ Huyện" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Row gutter={30}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="wards"
+                                rules={[{ required: true, message: "Vui lòng nhập phường/ Xã." }]}>
+                                <FloatInput label="Phường/ Xã" placeholder="Phường/ Xã" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="address"
+                                rules={[{ required: true, message: "Vui lòng nhập nhập địa chỉ chi tiết,...." }]}>
+                                <FloatTextArea label="Nhập địa chỉ chi tiết,..." placeholder="Nhập địa chỉ chi tiết,..." />
                             </Form.Item>
                             <label className="input-show-count">{count.address || 0}/200</label>
                         </Col>
                     </Row>
 
-                    <Row style={{ marginTop: 45 }} align="middle" justify="center">
-                        <Button className="button-light-yellow" style={{ height: 50, width: 240, fontSize: 16 }}>ĐĂNG KÝ</Button>
-                    </Row>
+                </Box>
+                <div style={{ marginTop: '10px' }}>
+                    <Box>
+                        <h3 style={{ fontWeight: 'bold' }}>Thông tin tài khoản ngân hàng (nhận hoàn tiền đặt trước)</h3>
+                        <Row gutter={30}>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="bankAccount"
+                                    rules={[{ required: true, message: "Vui lòng nhập STK ngân hàng...." }]}>
+                                    <FloatInput label="STK ngân hàng..." placeholder="STK ngân hàng..." />
+                                </Form.Item>
+                                <label className="input-show-count">{count.bankAccount || 0}/20</label>
+                            </Col>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="bank"
+                                    rules={[{ required: true, message: "Vui lòng nhập ngân hàng." }]}>
+                                    <FloatInput label="Ngân hàng" placeholder="Ngân hàng" />
+                                </Form.Item>
+                            </Col>
 
-                    <Row style={{ marginTop: 35 }} align="middle" justify="center">
-                        <span>Bạn đã có tài khoản?<span className="anchor-text" > Đăng nhập ngay</span></span>
+                        </Row>
+                        <Row gutter={30}>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="accountHolder"
+                                    rules={[{ required: true, message: "Vui lòng nhập chủ tài khoản...." }]}>
+                                    <FloatInput label="Chủ tài khoản..." placeholder="Chủ tài khoản..." />
+                                </Form.Item>
+                                <label className="input-show-count">{count.accountHolder || 0}/50</label>
+                            </Col>
+                            <Col span={12}>
+                                <Form.Item
+                                    name="branch"
+                                    rules={[{ required: true, message: "Vui lòng nhập chi nhánh." }]}>
+                                    <FloatInput label="Chi nhánh" placeholder="Chi nhánh" />
+                                </Form.Item>
+                            </Col>
+
+                        </Row>
+                    </Box>
+
+                    <Row style={{ marginTop: 45 }} align="middle" justify="center">
+                        <Button className="button-light-yellow" style={{ height: 50, width: 240, fontSize: 16 }}>Cập nhật</Button>
                     </Row>
-                </Form >
-            </Box>
+                </div>
+            </Form >
         </div>
     )
 }

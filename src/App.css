@@ -40,3 +40,9 @@
 .bg-white {
   background: white !important;
 }
+
+.ant-upload.ant-upload-select-picture-card {
+  width: 100% !important;
+  height: 150px !important;
+  border-radius: 10px !important;
+}
