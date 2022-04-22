@@ -144,6 +144,7 @@ const ItemCard = ({ price, description, status }: CardProps) => {
 
                     </div> : <></>}
                 <img
+                    width='100%'
                     style={{ filter: isHovering || status !== ItemCardStatus.NEW ? "brightness(50%)" : "brightness(1)" }}
                     alt="example"
                     src={ItemImage}

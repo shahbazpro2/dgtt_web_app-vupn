@@ -3,6 +3,8 @@ import { Breadcrumb, Button, Col, Divider, Pagination, Radio, RadioChangeEvent, 
 import { Link } from "react-router-dom";
 import React from 'react'
 import { ClockCircleOutlined, EyeFilled, FacebookFilled, HeartFilled } from "@ant-design/icons";
+import ItemCard from "../../common/components/ItemCard";
+import { ItemCardStatus } from "../../common/types/types";
 
 
 const AuctionItem = () => {
@@ -171,9 +173,21 @@ const AuctionItem = () => {
             <div style={{ marginTop: '100px', textAlign: 'center', marginBottom: '10px' }}>
                 <h1 style={{ fontWeight: 'bold', letterSpacing: '0.1em' }}>TÀI SẢN khác</h1>
             </div>
-            <Row gutter={5}>
-                <Col xs={4.8}>
-
+            <Row gutter={5} justify="center">
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
+                </Col>
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
+                </Col>
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
+                </Col>
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
+                </Col>
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
                 </Col>
             </Row>
 
