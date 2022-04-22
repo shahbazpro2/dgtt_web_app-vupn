@@ -2,6 +2,7 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Button, Card, Space } from "antd";
 import { format, intervalToDuration } from "date-fns";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ItemImage from '../../../assets/images/item_image.png';
 import { ReactComponent as Medal } from '../../../assets/images/medal.svg';
 import { ItemCardStatus } from "../types/types";
@@ -30,6 +31,7 @@ const ItemCard = ({ price, description, status }: CardProps) => {
     const [countdown, setCountdown] = useState<Countdown>(defaultCountdown);
     const [isFavoriteHovering, setIsFavoriteHovering] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
+    const navigate = useNavigate()
     // const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
@@ -158,6 +160,7 @@ const ItemCard = ({ price, description, status }: CardProps) => {
             hoverable
             style={{ borderRadius: '15px', marginRight: 10, marginLeft: 10, maxWidth: 280 }}
             cover={generateCardCover()}
+            onClick={() => navigate('/auction-item/12')}
         >
             {generateCardMeta()}
         </Card>

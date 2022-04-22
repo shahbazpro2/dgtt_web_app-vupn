@@ -2,6 +2,7 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Space } from "antd";
 import { format, intervalToDuration } from "date-fns";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ItemImage from '../../../assets/images/item_image.png';
 
 interface Countdown {
@@ -21,6 +22,7 @@ const defaultCountdown: Countdown = {
 const ItemListCard = () => {
     const [countdown, setCountdown] = useState<Countdown>(defaultCountdown);
     const [isFavoriteHovering, setIsFavoriteHovering] = useState(false);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -45,7 +47,7 @@ const ItemListCard = () => {
     }
 
     return (
-        <Row className="item-list-card" gutter={30}>
+        <Row className="item-list-card" gutter={30} onClick={() => navigate('/auction-item/12')}>
             <Col span={5} style={{ marginLeft: -15 }}>
                 <img
                     alt="example"
