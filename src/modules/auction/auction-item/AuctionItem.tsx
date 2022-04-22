@@ -1,13 +1,25 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Breadcrumb, Button, Col, Divider, Pagination, Radio, RadioChangeEvent, Row, Space, Switch } from "antd";
 import { Link } from "react-router-dom";
-import React from 'react'
+import React, { Component, useState } from 'react'
 import { ClockCircleOutlined, EyeFilled, FacebookFilled, HeartFilled } from "@ant-design/icons";
 import ItemCard from "../../common/components/ItemCard";
 import { ItemCardStatus } from "../../common/types/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+
+// import required modules
+import { FreeMode, Navigation, Thumbs } from "swiper";
 
 
 const AuctionItem = () => {
+    const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
     return (
         <div
             style={{
@@ -33,9 +45,54 @@ const AuctionItem = () => {
                     Chi tiết tài sản
                 </Breadcrumb.Item>
             </Breadcrumb>
-            <Row gutter={30}>
+            <Row gutter={70} style={{ marginTop: '30px' }}>
                 <Col xs={12}>
+                    <Swiper
+                        loop={true}
+                        spaceBetween={10}
+                        navigation={true}
+                        thumbs={{ swiper: thumbsSwiper }}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="mySwiper1"
+                    >
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                        </SwiperSlide>
 
+                    </Swiper>
+                    <Swiper
+                        onSwiper={setThumbsSwiper}
+                        loop={true}
+                        spaceBetween={10}
+                        slidesPerView={4}
+                        freeMode={true}
+                        watchSlidesProgress={true}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="mySwiper2"
+                    >
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img width="100%" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                        </SwiperSlide>
+
+                    </Swiper>
                 </Col>
                 <Col xs={12}>
                     <div style={{ padding: '2px 15px', backgroundColor: '#DCDCDC', display: 'inline-block' }}>
@@ -173,7 +230,10 @@ const AuctionItem = () => {
             <div style={{ marginTop: '100px', textAlign: 'center', marginBottom: '10px' }}>
                 <h1 style={{ fontWeight: 'bold', letterSpacing: '0.1em' }}>TÀI SẢN khác</h1>
             </div>
-            <Row gutter={5} justify="center">
+            <Row gutter={5}>
+                <Col xs={4}>
+                    <ItemCard status={ItemCardStatus.NEW} />
+                </Col>
                 <Col xs={4}>
                     <ItemCard status={ItemCardStatus.NEW} />
                 </Col>

@@ -16,6 +16,7 @@ body {
     font-family: SVN-Gilroy !important;
 }
 
+
 .button-light-yellow {
     border-radius: 10px !important;
     background: #E8AA0C !important;
@@ -637,6 +638,22 @@ cursor: pointer;
             color: black;
         }
     }
+}
+
+.mySwiper1{
+    height: 450px;
+}
+
+.mySwiper2{
+    height: 80px;
+    margin-top: 10px;
+}
+.swiper-button-prev{
+    color: white;
+}
+
+.swiper-button-next{
+    color: white;
 }
 
 // }
