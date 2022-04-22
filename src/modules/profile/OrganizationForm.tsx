@@ -21,11 +21,15 @@ const OrganizationForm = () => {
             });
         }
     }
+    console.log(form.getFieldsValue())
     const uploadButton = (
         <div>
             <PlusCircleOutlined style={{ fontSize: 40, color: '#c9c9c9' }} />
         </div>
     );
+
+    const file = form.getFieldValue('file')?.split('\\')[2]
+
     return (
         <div>
             <Form
@@ -62,7 +66,14 @@ const OrganizationForm = () => {
                                 <Form.Item
                                     name="file"
                                     rules={[{ required: true, message: "Vui lòng nhập file" }]}>
-                                    <FloatInput type="file" label="" />
+                                    <div className="input-wrapper">
+                                        <div>{file}</div>
+                                        <div className="upload-btn-wrapper">
+                                            <button className="btn">Chọn tệp</button>
+                                            <input type="file" name="myfile" />
+                                        </div>
+                                    </div>
+
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -286,7 +297,7 @@ const OrganizationForm = () => {
                     </Row>
                 </div>
             </Form >
-        </div>
+        </div >
     )
 }
 

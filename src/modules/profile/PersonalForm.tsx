@@ -4,6 +4,7 @@ import { FloatInput, FloatTextArea } from '../common/components/Index'
 import { useState } from 'react';
 import FloatDatePicker from "../common/components/FloatDatePicker";
 import { PlusCircleOutlined } from '@ant-design/icons';
+const { Option } = Select;
 
 const PersonalForm = () => {
     const [form] = Form.useForm();
@@ -50,7 +51,10 @@ const PersonalForm = () => {
                             <Form.Item
                                 name="sex"
                             >
-                                <Select placeholder="Giới tính" className="custom-select"></Select>
+                                <Select placeholder="Giới tính" className="custom-select">
+                                    <Option value="male">Male</Option>
+                                    <Option value="female">Female</Option>
+                                </Select>
                             </Form.Item>
                         </Col>
                     </Row>
