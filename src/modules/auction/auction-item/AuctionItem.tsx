@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { Breadcrumb, Button, Col, Divider, Pagination, Radio, RadioChangeEvent, Row, Space, Switch } from "antd";
+import { Breadcrumb, Button, Col, Divider, Pagination, Radio, RadioChangeEvent, Row, Space, Switch, Tabs } from "antd";
 import { Link } from "react-router-dom";
 import React, { Component, useState } from 'react'
 import { ClockCircleOutlined, EyeFilled, FacebookFilled, HeartFilled } from "@ant-design/icons";
@@ -16,10 +16,17 @@ import "swiper/css/thumbs";
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
+import TabContent1 from "./TabContent1";
+import TabContent2 from "./TabContent2";
+import TabContent3 from "./TabContent3";
+import TabContent4 from "./TabContent4";
+const { TabPane } = Tabs;
 
 
 const AuctionItem = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+    const [seeMore, setSeeMore] = useState(false)
+    const [tabs, setTabs] = useState(1)
     return (
         <div
             style={{
@@ -194,6 +201,18 @@ const AuctionItem = () => {
                 <Col xs={20}>
                     <div style={{ marginTop: '80px', borderRadius: '15px', background: 'white', padding: '70px 50px 140px 50px', position: 'relative' }}>
                         <div className="tab">
+                            <Tabs type="card" className="custom-tab" onChange={(tab) => { setTabs(Number(tab)); setSeeMore(false) }}>
+                                <TabPane tab="THÔNG TIN TÀI SẢN" key="1">
+                                </TabPane>
+                                <TabPane tab="THÔNG TIN TỔ CHỨC ĐẤU GIÁ / NGƯỜI CÓ TÀI SẢN" key="2">
+                                </TabPane>
+                                <TabPane tab="QUY CHẾ ĐẤU GIÁ" key="3">
+                                </TabPane>
+                                <TabPane tab="TÀI LIỆU LIÊN QUAN" key="4">
+                                </TabPane>
+                            </Tabs>
+                        </div>
+                        {/* <div className="tab">
                             <div className="tab-item active" style={{ borderTopRightRadius: '0px', borderBottomRightRadius: '0px' }}>
                                 THÔNG TIN TÀI SẢN
                             </div>
@@ -206,29 +225,18 @@ const AuctionItem = () => {
                             <div className="tab-item">
                                 TÀI LIỆU LIÊN QUAN
                             </div>
-                        </div>
-                        <h3 style={{ fontWeight: 'bold' }}>Cây sanh ngàn năm thế cực kỳ giá trị, vô cùng hiếm có</h3>
-                        <p>
-                            Nơi có tài sản:  Số 15, Dịch Vọng Hậu, Cầu Giấy, Hà Nội.
-                        </p>
-                        <p>
-                            Mô tả: Thân cây kim ngân có độ dẻo dai, bền chắc, chiều cao có thể lên tới 6m. Lá cây kim ngân xòe tán rộng như bàn tay, quanh năm xanh tốt.
-                        </p>
-                        <img src={require('../../../assets/images/item_image.png')} alt="image" />
-                        <p style={{ marginTop: '40px' }}>
-                            Hoa kim ngân màu kem, gồm những cánh to, nở về đêm và có hương thơm dịu nhẹ. Hoa cây kim ngân trong tự nhiên thường nở từ khoảng tháng 4-11 hàng năm, tuy nhiên với các giống cây kim ngân chủ yếu để làm cảnh như ngày nay thì sẽ hiếm thấy hoa nở hơn.
-                            Quả của cây kim ngân hình trứng, đường kính cỡ nửa gang tay, khi chín sẽ có màu vàng nâu, khi quả khô nứt rụng ra có khoảng 10-20 hạt.
-                            Hoa kim ngân màu kem, gồm những cánh to, nở về đêm và có h
-                        </p>
-                        <div className="see-more">
-                            Xem thêm
-                        </div>
+                        </div> */}
+                        {tabs === 1 && <TabContent1 seeMore={seeMore} setSeeMore={setSeeMore} />}
+                        {tabs === 2 && <TabContent2 seeMore={seeMore} setSeeMore={setSeeMore} />}
+                        {tabs === 3 && <TabContent3 seeMore={seeMore} setSeeMore={setSeeMore} />}
+                        {tabs === 4 && <TabContent4 seeMore={seeMore} setSeeMore={setSeeMore} />}
+
                     </div>
 
                 </Col>
             </Row>
             <div style={{ marginTop: '100px', textAlign: 'center', marginBottom: '10px' }}>
-                <h1 style={{ fontWeight: 'bold', letterSpacing: '0.1em' }}>TÀI SẢN khác</h1>
+                <h1 style={{ color: 'black', letterSpacing: '0.1em' }}>TÀI SẢN khác</h1>
             </div>
             <Row gutter={5}>
                 <Col xs={4}>

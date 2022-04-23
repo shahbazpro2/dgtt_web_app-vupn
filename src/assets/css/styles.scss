@@ -12,6 +12,12 @@
     font-weight: 700;
 }
 
+@font-face {
+    font-family: 'SVN-Helga';
+    src: local('SVN-Helga'), url(../font/SVN-Helga.otf) format('opentype');
+    font-weight: 700;
+}
+
 body {
     font-family: SVN-Gilroy !important;
 }
@@ -493,31 +499,14 @@ body {
 }
 
 .tab{
-    width: 90%;
     position: absolute;
-    display: flex;
-    height: 50px;
       left: 50%;           
       transform: translate(-50%, 0);
-       border-radius: 18px;
-        border: 1px solid #ececec;
-         background: white;
-          margin-top: -95px
-}
-.tab>.active{
-    background-color: #E59F17;
-    color: white;
+          margin-top: -90px
 }
 
-.tab-item{
-    display: flex;
-    align-items: center;
-    padding:10px 50px;
-    
-    border-radius: 18px;
-   
-    font-weight: bold;
-cursor: pointer;
+.tab .ant-tabs-tab{
+    padding: 20px 30px !important;
 }
 
 .see-more{
@@ -536,6 +525,7 @@ cursor: pointer;
     border-top-right-radius: 0px;
     font-size: 16px;
     box-shadow: 100px -40px 100px rgb(240, 240, 240);
+    cursor: pointer;
 }
 
 .ant-card-body{
@@ -655,5 +645,7 @@ cursor: pointer;
 .swiper-button-next{
     color: white;
 }
+
+
 
 // }
